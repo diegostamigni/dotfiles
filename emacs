@@ -45,6 +45,9 @@
 (setenv "path" (concat (getenv "path")":~/.deno/bin"))
 (setq exec-path (append exec-path '("~/.deno/bin")))
 
+(setenv "path" (concat (getenv "path")":/usr/local/opt/libpq/bin"))
+(setq exec-path (append exec-path '("/usr/local/opt/libpq/bin")))
+
 (use-package magit :ensure t)
 (use-package avy :ensure t)
 (use-package lsp-mode :ensure t)
@@ -52,7 +55,6 @@
 (use-package company :ensure t)
 (use-package company-restclient :ensure t)
 (use-package yasnippet :ensure t)
-(use-package csharp-mode :ensure t)
 (use-package yaml-mode :ensure t)
 (use-package json-mode :ensure t)
 (use-package neotree :ensure t)
@@ -201,6 +203,20 @@
                     (ediff-get-region-contents ediff-current-difference 'B ediff-control-buffer))))
 (defun add-d-to-ediff-mode-map () (define-key ediff-mode-map "d" 'ediff-copy-both-to-C))
 (add-hook 'ediff-keymap-setup-hook 'add-d-to-ediff-mode-map)
+
+;; sql-postgres
+(setq sql-postgres-login-params nil) 
+
+;; define your connections
+(setq sql-connection-alist '(
+		(c-insurance-temp (sql-product 'postgres)
+                    (sql-database (concat "postgresql://"
+                                          "admin"
+                                          ":" (read-passwd "Enter password: ")
+                                          "@host"
+                                          ":port"
+                                          "/c-insurance-temp")))
+		))
 
 ;; adds company-restclient to company for auto-completion
 (add-to-list 'company-backends 'company-restclient)
