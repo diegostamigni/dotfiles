@@ -90,12 +90,7 @@
 (use-package copilot
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
   :ensure t)
-(use-package docker
-  :ensure t
-  :bind ("C-c d" . docker))
-(use-package dockerfile-mode :ensure t)
-(use-package docker-compose-mode :ensure t)
-
+ 
 (add-hook 'go-mode-hook #'lsp-deferred)
 (defun lsp-go-install-save-hooks ()
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
@@ -139,7 +134,7 @@
 (global-set-key (kbd "C-c /") 'comment-line)
 (global-set-key (kbd "C-c r") 'comment-region)
 (global-set-key (kbd "C-c j") 'json-pretty-print-buffer)
-(global-set-key (kbd "C-c f") 'vc-git-grep)
+(global-set-key (kbd "C-c f") 'counsel-git-grep)
 (global-set-key (kbd "C-c +") 'enlarge-window)
 (global-set-key (kbd "C-c -") 'shrink-window)
 (global-set-key (kbd "C-c y") 'company-yasnippet)
@@ -159,7 +154,6 @@
 (global-set-key (kbd "M-/") 'lsp-goto-implementation)
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 (global-set-key (kbd "C-s") 'swiper-isearch)
-(global-set-key (kbd "C-c d") 'docker)
 (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
 (global-set-key (kbd "C-x p") (lambda ()
                                 (interactive)
@@ -167,7 +161,7 @@
 
 (tool-bar-mode 0)
 (menu-bar-mode 0)
-(linum-mode 0)
+;;(linum-mode 0)
 (global-hl-line-mode 1)
 (global-visual-line-mode 1)
 (yas-global-mode 1)
@@ -188,7 +182,11 @@
 (setq counsel-mode t)
 (setq projectile-project-search-path '("~/Developer" ))
 (setq package-enable-at-startup nil)
+
 (add-to-list 'image-types 'svg)
+
+(when (eq system-type 'darwin)
+  (setq mac-option-modifier 'meta))
 
 (defun eshell-new()
   "Open a new instance of eshell."
@@ -214,7 +212,6 @@
                                           "admin"
                                           ":" (read-passwd "Enter password: ")
                                           "@host"
-                                          ":port"
                                           "/c-insurance-temp")))
 		))
 
