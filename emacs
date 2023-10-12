@@ -48,6 +48,17 @@
 (setenv "path" (concat (getenv "path")":/usr/local/opt/libpq/bin"))
 (setq exec-path (append exec-path '("/usr/local/opt/libpq/bin")))
 
+(setenv "LIBRARY_PATH"
+	(mapconcat 'identity
+	 '(
+       "/usr/local/Cellar/gcc/13.1.0/lib/gcc/13/"
+       "/usr/local/Cellar/libgccjit/13.1.0/lib/gcc/13/"
+       "/usr/local/Cellar/gcc/13.1.0/lib/gcc/13/gcc/x86_64-apple-darwin22/13/"
+       "/opt/homebrew/opt/gcc/lib/gcc/13"
+       "/opt/homebrew/opt/libgccjit/lib/gcc/13"
+       "/opt/homebrew/opt/gcc/lib/gcc/13/gcc/aarch64-apple-darwin22/13")
+         ":"))
+
 (use-package magit :ensure t)
 (use-package avy :ensure t)
 (use-package lsp-mode :ensure t)
@@ -158,6 +169,9 @@
 (global-set-key (kbd "C-x p") (lambda ()
                                 (interactive)
                                 (other-window -1)))
+(global-set-key (kbd "s-=") 'text-scale-increase)
+(global-set-key (kbd "s--") 'text-scale-decrease)
+(global-set-key (kbd "s-0") (lambda () (interactive) (text-scale-set 0)))
 
 (tool-bar-mode 0)
 (menu-bar-mode 0)
@@ -180,13 +194,18 @@
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq lsp-ui-imenu-auto-refresh 0)
 (setq counsel-mode t)
-(setq projectile-project-search-path '("~/Developer" ))
+(setq projectile-project-search-path '("~/Developer"))
 (setq package-enable-at-startup nil)
+(setq magit-repository-directories
+        '(("~/Developer" . 0)
+          ("~/Developer" . 1)))
 
 (add-to-list 'image-types 'svg)
 
 (when (eq system-type 'darwin)
-  (setq mac-option-modifier 'meta))
+  (setq mac-option-modifier 'meta)
+  (setq mac-command-modifier 'super)
+  )
 
 (defun eshell-new()
   "Open a new instance of eshell."
