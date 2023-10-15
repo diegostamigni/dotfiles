@@ -172,10 +172,12 @@
 (global-set-key (kbd "s-=") 'text-scale-increase)
 (global-set-key (kbd "s--") 'text-scale-decrease)
 (global-set-key (kbd "s-0") (lambda () (interactive) (text-scale-set 0)))
+(global-set-key (kbd "C-u") 'compile)
+(global-set-key (kbd "C-c C-u") 'shell-command)
 
 (tool-bar-mode 0)
 (menu-bar-mode 0)
-;;(linum-mode 0)
+(line-number-mode 0)
 (global-hl-line-mode 1)
 (global-visual-line-mode 1)
 (yas-global-mode 1)
