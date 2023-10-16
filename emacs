@@ -175,6 +175,8 @@
 (global-set-key (kbd "s-0") (lambda () (interactive) (text-scale-set 0)))
 (global-set-key (kbd "C-u") 'compile)
 (global-set-key (kbd "C-c C-u") 'shell-command)
+(global-set-key (kbd "C-c t") 'go-test-current-test)
+(global-set-key (kbd "C-c C-t") 'go-test-current-file)
 
 (tool-bar-mode 0)
 (menu-bar-mode 0)
