@@ -73,6 +73,7 @@
 (use-package lsp-ivy :ensure t)
 (use-package rg :ensure t)
 (use-package go-mode :ensure t)
+(use-package gotest :ensure t)
 (use-package counsel-projectile :ensure t)
 (use-package restclient :ensure t)
 (use-package uuidgen :ensure t)
