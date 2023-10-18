@@ -208,6 +208,9 @@
 (defun add-d-to-ediff-mode-map () (define-key ediff-mode-map "d" 'ediff-copy-both-to-C))
 (add-hook 'ediff-keymap-setup-hook 'add-d-to-ediff-mode-map)
 
+;; compilation mode colours
+(add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
+
 ;; adds company-restclient to company for auto-completion
 (add-to-list 'company-backends 'company-restclient)
 
