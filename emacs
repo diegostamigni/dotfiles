@@ -61,10 +61,10 @@
 (use-package uuidgen :ensure t)
 (use-package exec-path-from-shell
   :ensure t
-;; :defer  2
+ :defer  2
   :config
-;; (dolist (var '("GOPATH"  "GOROOT"))
-;;   (add-to-list 'exec-path-from-shell-variables var))
+ (dolist (var '("GOPATH"  "GOROOT"))
+   (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
 (use-package lsp-mode :ensure t)
 ;;(use-package zenburn-theme
