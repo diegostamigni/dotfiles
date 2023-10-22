@@ -84,6 +84,7 @@
 (use-package copilot
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
   :ensure t)
+(use-package multiple-cursors :ensure t)
  
 (add-hook 'go-mode-hook #'lsp-deferred)
 (defun lsp-go-install-save-hooks ()
@@ -159,6 +160,10 @@
 (global-set-key (kbd "C-c C-u") 'shell-command)
 (global-set-key (kbd "C-c t") 'go-test-current-test)
 (global-set-key (kbd "C-c C-t") 'go-test-current-file)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 (tool-bar-mode 0)
 (menu-bar-mode 0)
