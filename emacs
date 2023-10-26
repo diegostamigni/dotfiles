@@ -89,7 +89,6 @@
 (use-package markdown-mode :ensure t)
 
 (require 'dired-x)
-(require 'ansi-color)
  
 (add-hook 'go-mode-hook #'lsp-deferred)
 (defun lsp-go-install-save-hooks ()
@@ -242,12 +241,6 @@
     (insert line)
     (move-beginning-of-line 1)
     (forward-char column)))
-
-(defun colorize-compilation-buffer ()
-  (toggle-read-only)
-  (ansi-color-apply-on-region compilation-filter-start (point))
-  (toggle-read-only))
-(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 ;; compilation mode colours
 (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
