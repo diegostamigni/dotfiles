@@ -5,9 +5,9 @@
 ;; main Emacs configuration
 
 ;;; code:
-(add-to-list 'package-archives '("stable" . "https://stable.melpa.org/packages/"))
+;;(add-to-list 'package-archives '("stable" . "https://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
+;;(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
 (package-initialize)
 
 (defvar bootstrap-version)
@@ -67,8 +67,6 @@
    (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
 (use-package lsp-mode :ensure t)
-;;(use-package zenburn-theme
-;;(use-package jetbrains-darcula-theme
 (use-package vs-dark-theme
   :ensure t
   :config
@@ -86,6 +84,12 @@
   :ensure t)
 (use-package multiple-cursors :ensure t)
 (use-package smex :ensure t)
+(use-package move-text :ensure t)
+(use-package dockerfile-mode :ensure t)
+(use-package markdown-mode :ensure t)
+
+(require 'dired-x)
+(require 'ansi-color)
  
 (add-hook 'go-mode-hook #'lsp-deferred)
 (defun lsp-go-install-save-hooks ()
@@ -169,6 +173,9 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 (global-set-key (kbd "C-\"") 'mc/skip-to-next-like-this)
 (global-set-key (kbd "C-:") 'mc/skip-to-previous-like-this)
+(global-set-key (kbd "C-,") 'duplicate-line)
+(global-set-key (kbd "M-p") 'move-text-up)
+(global-set-key (kbd "M-n") 'move-text-down)
 
 (tool-bar-mode 0)
 (menu-bar-mode 0)
@@ -198,6 +205,10 @@
 (setq magit-repository-directories
         '(("~/Developer" . 0)
           ("~/Developer" . 1)))
+(setq dired-omit-files
+      (concat dired-omit-files "\\|^\\..+$"))
+(setq-default dired-dwim-target t)
+(setq dired-listing-switches "-alh")
 
 (add-to-list 'image-types 'svg)
 
@@ -219,6 +230,24 @@
                     (ediff-get-region-contents ediff-current-difference 'B ediff-control-buffer))))
 (defun add-d-to-ediff-mode-map () (define-key ediff-mode-map "d" 'ediff-copy-both-to-C))
 (add-hook 'ediff-keymap-setup-hook 'add-d-to-ediff-mode-map)
+
+(defun duplicate-line ()
+  "Duplicate current line"
+  (interactive)
+  (let ((column (- (point) (point-at-bol)))
+        (line (let ((s (thing-at-point 'line t)))
+                (if s (string-remove-suffix "\n" s) ""))))
+    (move-end-of-line 1)
+    (newline)
+    (insert line)
+    (move-beginning-of-line 1)
+    (forward-char column)))
+
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region compilation-filter-start (point))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 ;; compilation mode colours
 (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
