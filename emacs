@@ -5,9 +5,7 @@
 ;; main Emacs configuration
 
 ;;; code:
-;;(add-to-list 'package-archives '("stable" . "https://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-;;(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
 (package-initialize)
 
 (defvar bootstrap-version)
@@ -30,17 +28,6 @@
 (eval-when-compile
   (require 'use-package))
 
-(setenv "LIBRARY_PATH"
-	(mapconcat 'identity
-	 '(
-       "/usr/local/Cellar/gcc/13.1.0/lib/gcc/13/"
-       "/usr/local/Cellar/libgccjit/13.1.0/lib/gcc/13/"
-       "/usr/local/Cellar/gcc/13.1.0/lib/gcc/13/gcc/x86_64-apple-darwin22/13/"
-       "/opt/homebrew/opt/gcc/lib/gcc/13"
-       "/opt/homebrew/opt/libgccjit/lib/gcc/13"
-       "/opt/homebrew/opt/gcc/lib/gcc/13/gcc/aarch64-apple-darwin22/13")
-         ":"))
-
 (use-package magit :ensure t)
 (use-package avy :ensure t)
 (use-package lsp-mode :ensure t)
@@ -61,7 +48,7 @@
 (use-package uuidgen :ensure t)
 (use-package exec-path-from-shell
   :ensure t
- :defer  2
+  :defer  2
   :config
  (dolist (var '("GOPATH"  "GOROOT"))
    (add-to-list 'exec-path-from-shell-variables var))
