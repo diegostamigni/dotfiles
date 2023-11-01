@@ -83,7 +83,6 @@
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
   :ensure t)
 (use-package multiple-cursors :ensure t)
-(use-package smex :ensure t)
 (use-package move-text :ensure t)
 (use-package dockerfile-mode :ensure t)
 (use-package markdown-mode :ensure t)
@@ -128,8 +127,6 @@
    "<+>" "<=" "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<"
    "<~" "<~~" "</" "</>" "~@" "~-" "~>" "~~" "~~>" "%%"))
 
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 (global-set-key (kbd "C-c b") 'ibuffer)
 (global-set-key (kbd "C-c 0") 'avy-goto-char)
 (global-set-key (kbd "C-c /") 'comment-line)
@@ -186,8 +183,6 @@
 (put 'erase-buffer 'disabled nil)
 (global-ligature-mode 't)
 (counsel-projectile-mode)
-(ido-mode 1)
-(ido-everywhere 1)
 
 (setq-default tab-width 4)
 (setq user-mail-address "diego.stamigni@gmail.com")
