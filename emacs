@@ -73,6 +73,7 @@
 (use-package move-text :ensure t)
 (use-package dockerfile-mode :ensure t)
 (use-package markdown-mode :ensure t)
+(use-package go-tag :ensure t)
 
 (require 'dired-x)
  
