@@ -74,8 +74,10 @@
 (use-package dockerfile-mode :ensure t)
 (use-package markdown-mode :ensure t)
 (use-package go-tag :ensure t)
+(use-package dap-mode :ensure t)
 
 (require 'dired-x)
+(require 'dap-dlv-go)
  
 (add-hook 'go-mode-hook #'lsp-deferred)
 (defun lsp-go-install-save-hooks ()
@@ -160,6 +162,11 @@
 (global-set-key (kbd "C-,") 'duplicate-line)
 (global-set-key (kbd "M-p") 'move-text-up)
 (global-set-key (kbd "M-n") 'move-text-down)
+(global-set-key (kbd "C-c C-c C-d") 'dap-debug)
+(global-set-key (kbd "C-c C-c C-n") 'dap-next)
+(global-set-key (kbd "C-c C-c C-s") 'dap-step-in)
+(global-set-key (kbd "C-c C-c C-o") 'dap-step-out)
+(global-set-key (kbd "C-c C-c C-k") 'dap-disconnect)
 
 (tool-bar-mode 0)
 (menu-bar-mode 0)
@@ -191,6 +198,7 @@
       (concat dired-omit-files "\\|^\\..+$"))
 (setq-default dired-dwim-target t)
 (setq dired-listing-switches "-alh")
+(setq dap-auto-configure-features '(sessions locals controls tooltip))
 
 (add-to-list 'image-types 'svg)
 
