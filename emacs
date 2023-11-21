@@ -167,6 +167,8 @@
 (global-set-key (kbd "C-c C-c C-s") 'dap-step-in)
 (global-set-key (kbd "C-c C-c C-o") 'dap-step-out)
 (global-set-key (kbd "C-c C-c C-k") 'dap-disconnect)
+(global-set-key (kbd "C-c <next>") 'flycheck-next-error)
+(global-set-key (kbd "C-c <prior>") 'flycheck-previous-error)
 
 (tool-bar-mode 0)
 (menu-bar-mode 0)
