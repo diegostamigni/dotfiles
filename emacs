@@ -75,9 +75,37 @@
 (use-package markdown-mode :ensure t)
 (use-package go-tag :ensure t)
 (use-package dap-mode :ensure t)
+(use-package eterm-256color
+  :ensure t
+  :hook (term-mode . eterm-256color-mode))
+(use-package vterm
+  :ensure t
+  :commands vterm
+  :config
+  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+  (setq vterm-max-scrollback 10000))
+(use-package eshell
+  :hook (eshell-first-time-mode . efs/configure-eshell))
+(use-package eshell-git-prompt
+  :ensure t
+  :config
+  (eshell-git-prompt-use-theme 'git-radar))
 
 (require 'dired-x)
 (require 'dap-dlv-go)
+
+(defun efs/configure-eshell ()
+  (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
+  (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
+  (add-hook 'eshell-mode-hook
+			(lambda ()
+              (define-key eshell-mode-map (kbd "C-r") #'counsel-esh-history)))
+
+
+  (setq eshell-history-size         10000
+        eshell-buffer-maximum-lines 10000
+        eshell-hist-ignoredups t
+        eshell-scroll-to-bottom-on-input t))
  
 (add-hook 'go-mode-hook #'lsp-deferred)
 (defun lsp-go-install-save-hooks ()
