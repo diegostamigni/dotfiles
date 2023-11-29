@@ -229,6 +229,9 @@
 (setq-default dired-dwim-target t)
 (setq dired-listing-switches "-alh")
 (setq dap-auto-configure-features '(sessions locals controls tooltip))
+(setq frame-title-format
+      (list (format "emacs ~ ")
+        '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 
 (add-to-list 'image-types 'svg)
 
