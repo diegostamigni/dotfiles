@@ -28,10 +28,32 @@
 (eval-when-compile
   (require 'use-package))
 
+(use-package which-key
+  :ensure t
+  :defer 0
+  :diminish which-key-mode
+  :config
+  (which-key-mode)
+  (setq which-key-idle-delay 1))
 (use-package magit :ensure t)
 (use-package avy :ensure t)
-(use-package lsp-mode :ensure t)
-(use-package lsp-ui :ensure t)
+(use-package lsp-mode
+  :ensure t
+  :hook (
+		 (terraform-mode . lsp-deferred)
+		 (go-mode . lsp-deferred)
+		 (csharp-mode . lsp-deferred)
+		 )
+  :config
+  (lsp-enable-which-key-integration t))
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-position 'bottom))
+(use-package lsp-treemacs
+  :after lsp)
+(use-package lsp-ivy
+  :after lsp)
 (use-package company :ensure t)
 (use-package company-restclient :ensure t)
 (use-package yasnippet :ensure t)
@@ -39,10 +61,16 @@
 (use-package json-mode :ensure t)
 (use-package neotree :ensure t)
 (use-package ligature :ensure t)
-(use-package lsp-ivy :ensure t)
 (use-package rg :ensure t)
 (use-package go-mode :ensure t)
 (use-package gotest :ensure t)
+(use-package counsel
+  :ensure t
+  :bind (("C-M-j" . 'counsel-switch-buffer-other-window)
+         :map minibuffer-local-map
+         ("C-r" . 'counsel-minibuffer-history))
+  :config
+  (counsel-mode 1))
 (use-package counsel-projectile :ensure t)
 (use-package restclient :ensure t)
 (use-package uuidgen :ensure t)
@@ -53,7 +81,6 @@
  (dolist (var '("GOPATH"  "GOROOT"))
    (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
-(use-package lsp-mode :ensure t)
 (use-package vs-dark-theme
   :ensure t
   :config
@@ -90,6 +117,22 @@
   :ensure t
   :config
   (eshell-git-prompt-use-theme 'git-radar))
+(use-package nerd-icons :ensure t)
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-support-imenu t)
+  (setq find-file-visit-truename t)
+  (setq inhibit-compacting-font-caches t))
+(use-package ivy
+  :ensure t
+  :config
+  (ivy-mode 1))
+(use-package ivy-rich
+  :after ivy
+  :init
+  (ivy-rich-mode 1))
 
 (require 'dired-x)
 (require 'dap-dlv-go)
@@ -106,8 +149,7 @@
         eshell-buffer-maximum-lines 10000
         eshell-hist-ignoredups t
         eshell-scroll-to-bottom-on-input t))
- 
-(add-hook 'go-mode-hook #'lsp-deferred)
+
 (defun lsp-go-install-save-hooks ()
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
@@ -116,7 +158,6 @@
  '(("gopls.completeUnimported" t t)
    ("gopls.staticcheck" t t)))
 
-(add-hook 'csharp-mode-hook #'lsp-deferred)
 (defun lsp-csharp-install-save-hooks ()
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
@@ -218,7 +259,6 @@
 (setq inhibit-startup-message t)
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq lsp-ui-imenu-auto-refresh 0)
-(setq counsel-mode t)
 (setq projectile-project-search-path '("~/Developer"))
 (setq package-enable-at-startup nil)
 (setq magit-repository-directories
@@ -266,11 +306,9 @@
     (move-beginning-of-line 1)
     (forward-char column)))
 
-;; compilation mode colours
 (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
-
-;; adds company-restclient to company for auto-completion
 (add-to-list 'company-backends 'company-restclient)
+(setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
 
 ;;; .emacs ends here
 (custom-set-variables
