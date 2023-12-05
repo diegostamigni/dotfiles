@@ -40,10 +40,10 @@
 (use-package lsp-mode
   :ensure t
   :hook (
-		 (terraform-mode . lsp-deferred)
-		 (go-mode . lsp-deferred)
-		 (csharp-mode . lsp-deferred)
-		 )
+     (terraform-mode . lsp-deferred)
+     (go-mode . lsp-deferred)
+     (csharp-mode . lsp-deferred)
+     )
   :config
   (lsp-enable-which-key-integration t))
 (use-package lsp-ui
@@ -130,6 +130,7 @@
   :config
   (ivy-mode 1))
 (use-package ivy-rich
+  :ensure t
   :after ivy
   :init
   (ivy-rich-mode 1))
@@ -141,7 +142,7 @@
   (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
   (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
   (add-hook 'eshell-mode-hook
-			(lambda ()
+      (lambda ()
               (define-key eshell-mode-map (kbd "C-r") #'counsel-esh-history)))
 
 
@@ -269,9 +270,6 @@
 (setq-default dired-dwim-target t)
 (setq dired-listing-switches "-alh")
 (setq dap-auto-configure-features '(sessions locals controls tooltip))
-(setq frame-title-format
-      (list (format "emacs ~ ")
-        '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 
 (add-to-list 'image-types 'svg)
 
