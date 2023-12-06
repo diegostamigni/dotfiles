@@ -134,6 +134,9 @@
   :after ivy
   :init
   (ivy-rich-mode 1))
+(use-package terraform-mode
+  :ensure t
+  :after lsp)
 
 (require 'dired-x)
 (require 'dap-dlv-go)
