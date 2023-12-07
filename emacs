@@ -118,13 +118,22 @@
   :config
   (eshell-git-prompt-use-theme 'git-radar))
 (use-package nerd-icons :ensure t)
-(use-package doom-modeline
+(use-package mood-line
   :ensure t
-  :init (doom-modeline-mode 1)
+  :init (mood-line-mode)
   :config
-  (setq doom-modeline-support-imenu t)
-  (setq find-file-visit-truename t)
-  (setq inhibit-compacting-font-caches t))
+  (set-face-attribute 'mode-line nil
+                      :background "#2E2E2E"
+                      :foreground "white"
+                      :box '(:line-width 4 :color "#2E2E2E")
+                      :overline nil
+                      :underline nil)
+  (set-face-attribute 'mode-line-inactive nil
+                      :background "#2D2D2D"
+                      :foreground "white"
+                      :box '(:line-width 4 :color "#2D2D2D")
+                      :overline nil
+                      :underline nil))
 (use-package ivy
   :ensure t
   :config
@@ -317,6 +326,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" default))
  '(package-selected-packages
    '(uuidgen company-restclient restclient rg counsel-projectile projectile lsp-ivy ligature modus-themes zenburn-theme yasnippet-snippets yaml-mode web-mode vs-dark-theme use-package-hydra spacemacs-theme solarized-theme prettier-js powerline neotree magit lsp-ui json-mode jetbrains-darcula-theme hydra go-snippets go-mode go-imports gh-md flycheck-golangci-lint fira-code-mode exec-path-from-shell evil csharp-mode company-quickhelp cmake-mode avy add-node-modules-path)))
 (custom-set-faces
