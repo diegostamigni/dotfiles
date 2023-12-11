@@ -125,13 +125,13 @@
   (set-face-attribute 'mode-line nil
                       :background "#2E2E2E"
                       :foreground "white"
-                      :box '(:line-width 4 :color "#2E2E2E")
+                      :box '(:line-width 2 :color "#2A2A2A")
                       :overline nil
                       :underline nil)
   (set-face-attribute 'mode-line-inactive nil
                       :background "#2D2D2D"
                       :foreground "white"
-                      :box '(:line-width 4 :color "#2D2D2D")
+                      :box '(:line-width 2 :color "#2A2A2A")
                       :overline nil
                       :underline nil))
 (use-package ivy
