@@ -20,10 +20,10 @@ yabai -m config mouse_action1 move
 yabai -m config mouse_action2 resize
 
 # set focus follows mouse mode (default: off, options: off, autoraise, autofocus)
-# yabai -m config focus_follows_mouse autoraise
+yabai -m config focus_follows_mouse autoraise
 
 # set mouse follows focus mode (default: off)
-# yabai -m config mouse_follows_focus on
+yabai -m config mouse_follows_focus on
 
 # disable specific apps
 yabai -m rule --add app="^System Settings$" manage=off
