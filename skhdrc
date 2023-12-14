@@ -2,10 +2,13 @@ alt - i : yabai -m window --focus north
 alt - l : yabai -m window --focus east
 alt - k : yabai -m window --focus south
 alt - j : yabai -m window --focus west
+shift + alt - 1 : yabai -m window --focus next || yabai -m window --focus first
 
 shift + alt - h : yabai -m space --mirror x-axis
 shift + alt - v : yabai -m space --mirror y-axis
 shift + alt - b : yabai -m space --balance
+# requires system integrity protection off
+# alt - 1 : yabai -m space --focus next || yabai -m space --focus first
 
 shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 shift + alt - m : yabai -m window --toggle zoom-fullscreen

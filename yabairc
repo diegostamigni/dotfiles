@@ -27,3 +27,4 @@ yabai -m config mouse_action2 resize
 
 # disable specific apps
 yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Alfred Preferences$" manage=off
