@@ -43,6 +43,7 @@
      (terraform-mode . lsp-deferred)
      (go-mode . lsp-deferred)
      (csharp-mode . lsp-deferred)
+     (c-mode . lsp-deferred)
      )
   :config
   (lsp-enable-which-key-integration t))
