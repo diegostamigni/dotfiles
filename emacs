@@ -102,7 +102,13 @@
 (use-package dockerfile-mode :ensure t)
 (use-package markdown-mode :ensure t)
 (use-package go-tag :ensure t)
-(use-package dap-mode :ensure t)
+(use-package dap-mode
+  :ensure t
+  :config
+  (dap-ui-mode 1)
+  (tooltip-mode 1)
+  (dap-ui-controls-mode 1)
+  (dap-tooltip-mode 1))
 (use-package eterm-256color
   :ensure t
   :hook (term-mode . eterm-256color-mode))
@@ -143,7 +149,10 @@
   :ensure t
   :after ivy
   :init
-  (ivy-rich-mode 1))
+  (ivy-rich-mode 1)
+  :config
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
+  (setq ivy-rich-project-root-cache-mode 1))
 (use-package terraform-mode
   :ensure t
   :after lsp)
@@ -250,8 +259,8 @@
 (global-set-key (kbd "C-c C-c C-s") 'dap-step-in)
 (global-set-key (kbd "C-c C-c C-o") 'dap-step-out)
 (global-set-key (kbd "C-c C-c C-k") 'dap-disconnect)
-(global-set-key (kbd "C-c <next>") 'flycheck-next-error)
-(global-set-key (kbd "C-c <prior>") 'flycheck-previous-error)
+(global-set-key (kbd "C-<next>") 'flycheck-next-error)
+(global-set-key (kbd "C-<prior>") 'flycheck-previous-error)
 
 (tool-bar-mode 0)
 (menu-bar-mode 0)
