@@ -60,7 +60,6 @@
 (use-package yasnippet :ensure t)
 (use-package yaml-mode :ensure t)
 (use-package json-mode :ensure t)
-(use-package neotree :ensure t)
 (use-package ligature :ensure t)
 (use-package rg :ensure t)
 (use-package go-mode :ensure t)
@@ -156,7 +155,14 @@
 (use-package terraform-mode
   :ensure t
   :after lsp)
-
+(use-package treemacs :ensure t)
+(use-package treemacs-projectile
+  :after (treemacs projectile)
+  :ensure t)
+(use-package treemacs-magit
+  :after (treemacs magit)
+  :ensure t)
+  
 (require 'dired-x)
 (require 'dap-dlv-go)
 
@@ -219,8 +225,8 @@
 (global-set-key (kbd "C-c -") 'shrink-window)
 (global-set-key (kbd "C-c y") 'company-yasnippet)
 (global-set-key (kbd "C-c C-r") 'lsp-rename)
-(global-set-key (kbd "C-c C-k") 'neotree-show)
-(global-set-key (kbd "C-c C-l") 'neotree-hide)
+(global-set-key (kbd "C-c C-k") 'treemacs)
+(global-set-key (kbd "C-c C-l") 'treemacs-quit)
 (global-set-key (kbd "C--") 'undo)
 (global-set-key (kbd "M--") 'undo)
 (global-set-key (kbd "C-_") 'undo-redo)
