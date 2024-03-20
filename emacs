@@ -50,7 +50,10 @@
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
   :custom
-  (lsp-ui-doc-position 'bottom))
+   (lsp-ui-doc-show-with-cursor 't)
+   (lsp-ui-doc-delay 1)
+   (lsp-ui-doc-position 'at-point)
+   (lsp-ui-imenu-auto-refresh 0))
 (use-package lsp-treemacs
   :after lsp)
 (use-package lsp-ivy
@@ -287,7 +290,6 @@
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 (setq backup-directory-alist `(("." . "~/.saves")))
-(setq lsp-ui-imenu-auto-refresh 0)
 (setq projectile-project-search-path '("~/Developer"))
 (setq package-enable-at-startup nil)
 (setq magit-repository-directories
