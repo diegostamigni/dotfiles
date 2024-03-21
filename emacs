@@ -237,6 +237,7 @@
 (global-set-key (kbd "C-.") 'company-complete)
 (global-set-key (kbd "C-/") 'copilot-complete)
 (global-set-key (kbd "C-c d") 'lsp-ui-doc-show)
+(global-set-key (kbd "C-c h") 'lsp-ui-doc-hide)
 (global-set-key (kbd "C-c m") 'lsp-ui-imenu)
 (global-set-key (kbd "C-c .") 'lsp-ui-peek-find-references)
 (global-set-key (kbd "C-c o") 'lsp-ivy-workspace-symbol)
