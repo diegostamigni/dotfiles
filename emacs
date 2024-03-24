@@ -103,7 +103,6 @@
   :defer t)
 (use-package exec-path-from-shell
   :ensure t
-  :defer t
   :config
  (dolist (var '("GOPATH"  "GOROOT"))
    (add-to-list 'exec-path-from-shell-variables var))
