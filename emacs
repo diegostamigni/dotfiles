@@ -91,7 +91,9 @@
   :bind (("C-M-j" . 'counsel-switch-buffer-other-window)
          :map minibuffer-local-map
          ("C-r" . 'counsel-minibuffer-history))
-  :defer t)
+  :defer t
+  :init
+    (ivy-rich-mode 1))
 (use-package counsel-projectile
   :ensure t
   :after counsel)
@@ -189,10 +191,14 @@
                       :underline nil))
 (use-package ivy
   :ensure t
-  :defer t)
+  :defer t
+  :init
+    (ivy-mode 1))
 (use-package ivy-rich
   :ensure t
   :defer t
+  :init
+    (ivy-rich-mode 1)
   :config
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (setq ivy-rich-project-root-cache-mode 1))
