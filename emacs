@@ -26,60 +26,84 @@
   (package-install 'use-package))
 
 (eval-when-compile
-  (require 'use-package))
+  (require 'use-package)
+  ;; (setq use-package-verbose t)
+)
 
 (use-package which-key
   :ensure t
-  :defer 0
+  :defer t
   :diminish which-key-mode
   :config
   (which-key-mode)
   (setq which-key-idle-delay 1))
-(use-package magit :ensure t)
-(use-package avy :ensure t)
+(use-package magit
+  :ensure t
+  :defer t)
+(use-package avy
+  :ensure t
+  :defer t)
 (use-package lsp-mode
   :ensure t
+  :defer t
   :hook (
-     (terraform-mode . lsp-deferred)
-     (go-mode . lsp-deferred)
-     (csharp-mode . lsp-deferred)
-     (c-mode . lsp-deferred)
-     )
+  	(terraform-mode . lsp-deferred)
+    (go-mode . lsp-deferred)
+    (csharp-mode . lsp-deferred)
+    (c-mode . lsp-deferred))
   :config
   (lsp-enable-which-key-integration t))
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
+  :defer t
   :custom
    (lsp-ui-doc-show-with-cursor 't)
    (lsp-ui-doc-delay 1)
    (lsp-ui-doc-position 'at-point)
    (lsp-ui-imenu-auto-refresh 0))
-(use-package lsp-treemacs
-  :after lsp)
 (use-package lsp-ivy
-  :after lsp)
-(use-package company :ensure t)
-(use-package company-restclient :ensure t)
-(use-package yasnippet :ensure t)
-(use-package yaml-mode :ensure t)
-(use-package json-mode :ensure t)
+  :ensure t
+  :defer t)
+(use-package company
+  :ensure t
+  :defer t)
+(use-package yasnippet
+  :ensure t
+  :defer t)
+(use-package yaml-mode
+  :ensure t
+  :defer t)
+(use-package json-mode
+  :ensure t
+  :defer t)
 (use-package ligature :ensure t)
-(use-package rg :ensure t)
-(use-package go-mode :ensure t)
-(use-package gotest :ensure t)
+(use-package rg
+  :ensure t
+  :defer t)
+(use-package go-mode
+  :ensure t
+  :defer t)
+(use-package gotest
+  :ensure t
+  :after go-mode)
 (use-package counsel
   :ensure t
   :bind (("C-M-j" . 'counsel-switch-buffer-other-window)
          :map minibuffer-local-map
          ("C-r" . 'counsel-minibuffer-history))
-  :config
-  (counsel-mode 1))
-(use-package counsel-projectile :ensure t)
-(use-package restclient :ensure t)
-(use-package uuidgen :ensure t)
+  :defer t)
+(use-package counsel-projectile
+  :ensure t
+  :after counsel)
+(use-package restclient
+  :ensure t
+  :defer t)
+(use-package uuidgen
+  :ensure t
+  :defer t)
 (use-package exec-path-from-shell
   :ensure t
-  :defer  2
+  :defer t
   :config
  (dolist (var '("GOPATH"  "GOROOT"))
    (add-to-list 'exec-path-from-shell-variables var))
@@ -91,6 +115,7 @@
   (load-theme 'vs-dark t))
 (use-package projectile
   :ensure t
+  :defer t	
   :init
   (projectile-mode +1)
   :bind (:map projectile-mode-map
@@ -98,14 +123,33 @@
               ("C-c p" . projectile-command-map)))
 (use-package copilot
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
-  :ensure t)
-(use-package multiple-cursors :ensure t)
-(use-package move-text :ensure t)
-(use-package dockerfile-mode :ensure t)
-(use-package markdown-mode :ensure t)
-(use-package go-tag :ensure t)
+  :ensure t
+  :defer t
+  :config
+  (add-hook 'prog-mode-hook 'copilot-mode)
+  (with-eval-after-load 'company
+    ;; disable inline previews
+    (delq 'company-preview-if-just-one-frontend company-frontends))
+  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
+(use-package multiple-cursors
+  :ensure t
+  :defer t)
+(use-package move-text
+  :ensure t
+  :defer t)
+(use-package dockerfile-mode
+  :ensure t
+  :defer t)
+(use-package markdown-mode
+  :ensure t
+  :defer t)
+(use-package go-tag
+  :ensure t
+  :after go-mode)
 (use-package dap-mode
   :ensure t
+  :after go-mode	
   :config
   (dap-ui-mode 1)
   (tooltip-mode 1)
@@ -124,6 +168,7 @@
   :hook (eshell-first-time-mode . efs/configure-eshell))
 (use-package eshell-git-prompt
   :ensure t
+  :commands eshell	
   :config
   (eshell-git-prompt-use-theme 'git-radar))
 (use-package nerd-icons :ensure t)
@@ -145,26 +190,28 @@
                       :underline nil))
 (use-package ivy
   :ensure t
-  :config
-  (ivy-mode 1))
+  :defer t)
 (use-package ivy-rich
   :ensure t
-  :after ivy
-  :init
-  (ivy-rich-mode 1)
+  :defer t
   :config
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (setq ivy-rich-project-root-cache-mode 1))
 (use-package terraform-mode
   :ensure t
-  :after lsp)
-(use-package treemacs :ensure t)
+  :defer t)
+(use-package treemacs
+  :ensure t
+  :defer t)
 (use-package treemacs-projectile
   :after (treemacs projectile)
   :ensure t)
 (use-package treemacs-magit
   :after (treemacs magit)
   :ensure t)
+(use-package lsp-treemacs
+  :ensure t
+  :after (treemacs lsp-mode))
   
 (require 'dired-x)
 (require 'dap-dlv-go)
@@ -195,15 +242,6 @@
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 (add-hook 'csharp-mode-hook #'lsp-csharp-install-save-hooks)
 
-;; copilot
-;; (add-hook 'prog-mode-hook 'copilot-mode)
-(with-eval-after-load 'company
-  ;; disable inline previews
-  (delq 'company-preview-if-just-one-frontend company-frontends))
-  
-(define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-(define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
-
 ;; other configs
 (ligature-set-ligatures 't '("www" "go-mode"))
 (ligature-set-ligatures 'prog-mode
@@ -218,6 +256,7 @@
    "<+>" "<=" "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<"
    "<~" "<~~" "</" "</>" "~@" "~-" "~>" "~~" "~~>" "%%"))
 
+(global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-c b") 'ibuffer)
 (global-set-key (kbd "C-c 0") 'avy-goto-char)
 (global-set-key (kbd "C-c /") 'comment-line)
@@ -336,7 +375,6 @@
     (forward-char column)))
 
 (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
-(add-to-list 'company-backends 'company-restclient)
 (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
 
 ;;; .emacs ends here
