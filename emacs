@@ -175,7 +175,8 @@
 (use-package nerd-icons :ensure t)
 (use-package mood-line
   :ensure t
-  :init (mood-line-mode)
+  :init
+  (mood-line-mode)
   :config
   (set-face-attribute 'mode-line nil
                       :background "#2E2E2E"
@@ -272,6 +273,7 @@
 (global-set-key (kbd "C-c f") 'counsel-git-grep)
 (global-set-key (kbd "C-c k") 'counsel-ag)
 (global-set-key (kbd "C-x l") 'counsel-locate)
+(global-set-key (kbd "M-y") 'counsel-yank-pop)
 (global-set-key (kbd "C-c +") 'enlarge-window)
 (global-set-key (kbd "C-c -") 'shrink-window)
 (global-set-key (kbd "C-c y") 'company-yasnippet)
@@ -287,7 +289,7 @@
 (global-set-key (kbd "C-c d") 'lsp-ui-doc-show)
 (global-set-key (kbd "C-c h") 'lsp-ui-doc-hide)
 (global-set-key (kbd "C-c m") 'counsel-imenu)
-(global-set-key (kbd "C-c C-m") 'lsp-ui-imenu)
+(global-set-key (kbd "M-g i") 'lsp-ui-imenu)
 (global-set-key (kbd "C-c .") 'lsp-ui-peek-find-references)
 (global-set-key (kbd "C-c o") 'lsp-ivy-workspace-symbol)
 (global-set-key (kbd "M-/") 'lsp-goto-implementation)
