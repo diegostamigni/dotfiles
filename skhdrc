@@ -11,11 +11,11 @@ shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 shift + alt - f : yabai -m window --toggle zoom-fullscreen
 
 # window warp
-shift + ctrl - w: yabai -m window --warp north
-shift + ctrl - a: yabai -m window --warp west
-shift + ctrl - s: yabai -m window --warp south
-shift + ctrl - d: yabai -m window --warp east
-shift + ctrl - e: yabai -m window --toggle split
+ctrl + alt - w: yabai -m window --warp north
+ctrl + alt - a: yabai -m window --warp west
+ctrl + alt - s: yabai -m window --warp south
+ctrl + alt - d: yabai -m window --warp east
+ctrl + alt - e: yabai -m window --toggle split
 
 # increase window size
 shift + alt - w : yabai -m window --resize top:0:-20
