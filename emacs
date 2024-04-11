@@ -221,7 +221,10 @@
 (use-package lsp-treemacs
   :ensure t
   :after (treemacs lsp-mode))
-  
+(use-package pdf-tools
+  :ensure t
+  :defer t)
+
 (require 'dired-x)
 (require 'dap-dlv-go)
 
