@@ -1,3 +1,4 @@
+
 # bsp or float (default: float)
 yabai -m config layout bsp
 
@@ -29,4 +30,4 @@ yabai -m rule --add app="^iStat Menus" manage=off
 yabai -m rule --add app="^Messages$" manage=off
 yabai -m rule --add app="^Simulator$" manage=off
 yabai -m rule --add app="^Dash$" manage=off
-yabai -m rule --add app="^WhatsApp$" manage=off
+yabai -m rule --add app="WhatsApp" manage=off
