@@ -122,20 +122,6 @@
   :bind (:map projectile-mode-map
               ("s-p" . projectile-command-map)
               ("C-c p" . projectile-command-map)))
-(use-package copilot
-  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
-  :ensure t
-  :defer t
-  :config
-  (copilot-mode 1)
-  (setq copilot-disable-predicates t)
-  (add-hook 'prog-mode-hook 'copilot-mode)
-  (with-eval-after-load 'company
-    ;; disable inline previews
-    (delq 'company-preview-if-just-one-frontend company-frontends))
-  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-  (define-key copilot-mode-map (kbd "C-M-<next>") #'copilot-next-completion)
-  (define-key copilot-mode-map (kbd "C-M-<prior>") #'copilot-previous-completion))
 (use-package multiple-cursors
   :ensure t
   :defer t)
@@ -291,7 +277,6 @@
 (global-set-key (kbd "C-_") 'undo-redo)
 (global-set-key (kbd "M-_") 'undo-redo)
 (global-set-key (kbd "C-.") 'company-complete)
-(global-set-key (kbd "C-/") 'copilot-complete)
 (global-set-key (kbd "C-c d") 'lsp-ui-doc-show)
 (global-set-key (kbd "C-c h") 'lsp-ui-doc-hide)
 (global-set-key (kbd "C-c m") 'counsel-imenu)
