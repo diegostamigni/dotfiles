@@ -210,6 +210,18 @@
 (use-package pdf-tools
   :ensure t
   :defer t)
+(use-package undo-fu
+  :ensure t
+  :config
+  (setq undo-fu-allow-undo-in-region t))
+(use-package undo-fu-session
+  :ensure t
+  :config
+  (undo-fu-session-global-mode))
+(use-package vundo
+  :ensure t
+  :defer t
+  :config)
 
 (require 'dired-x)
 (require 'dap-dlv-go)
@@ -272,10 +284,11 @@
 (global-set-key (kbd "C-c C-r") 'lsp-rename)
 (global-set-key (kbd "C-c C-k") 'treemacs)
 (global-set-key (kbd "C-c C-l") 'treemacs-quit)
-(global-set-key (kbd "C--") 'undo)
-(global-set-key (kbd "M--") 'undo)
-(global-set-key (kbd "C-_") 'undo-redo)
-(global-set-key (kbd "M-_") 'undo-redo)
+(global-set-key (kbd "C--") 'undo-fu-only-undo)
+(global-set-key (kbd "M--") 'undo-fu-only-undo)
+(global-set-key (kbd "C-_") 'undo-fu-only-redo)
+(global-set-key (kbd "M-_") 'undo-fu-only-redo)
+(global-set-key (kbd "C-c C--") 'vundo)
 (global-set-key (kbd "C-.") 'company-complete)
 (global-set-key (kbd "C-c d") 'lsp-ui-doc-show)
 (global-set-key (kbd "C-c h") 'lsp-ui-doc-hide)
