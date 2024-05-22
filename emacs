@@ -220,8 +220,12 @@
   (undo-fu-session-global-mode))
 (use-package vundo
   :ensure t
+  :defer t)
+(use-package go-playground
+  :ensure t
   :defer t
-  :config)
+  :config
+  (setq go-playground-init-command "go mod init example.com"))
 
 (require 'dired-x)
 (require 'dap-dlv-go)
