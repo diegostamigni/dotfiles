@@ -52,7 +52,8 @@
   	(terraform-mode . lsp-deferred)
     (go-mode . lsp-deferred)
     (csharp-mode . lsp-deferred)
-    (c-mode . lsp-deferred))
+    (c-mode . lsp-deferred)
+    (swift-mode . lsp-deferred))
   :config
   (lsp-enable-which-key-integration t))
 (use-package lsp-ui
@@ -228,6 +229,14 @@
   :defer t
   :config
   (setq go-playground-init-command "go mod init example.com"))
+(use-package swift-mode
+  :ensure t
+  :defer t)
+(use-package lsp-sourcekit
+  :ensure t
+  :defer t
+  :config
+  (setq lsp-sourcekit-executable (string-trim (shell-command-to-string "xcrun --find sourcekit-lsp"))))
 
 (require 'dired-x)
 (require 'dap-dlv-go)
