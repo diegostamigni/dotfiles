@@ -9,3 +9,5 @@ alias ls='ls -l'
 alias emacs='emacsclient -nw'
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
+source <(fzf --zsh)
+
