@@ -27,8 +27,12 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(unless (package-installed-p 'vc-use-package)
+  (package-vc-install "https://github.com/slotThe/vc-use-package"))
+
 (eval-when-compile
   (require 'use-package)
+  (require 'vc-use-package)
   ;; (setq use-package-verbose t)
 )
 
@@ -53,7 +57,8 @@
     (go-mode . lsp-deferred)
     (csharp-mode . lsp-deferred)
     (c-mode . lsp-deferred)
-    (swift-mode . lsp-deferred))
+    (swift-mode . lsp-deferred)
+    (typescript-mode . lsp-deferred))
   :config
   (lsp-enable-which-key-integration t))
 (use-package lsp-ui
@@ -82,7 +87,9 @@
 (use-package ligature :ensure t)
 (use-package rg
   :ensure t
-  :defer t)
+  :defer t
+  :config
+  (rg-enable-default-bindings))
 (use-package go-mode
   :ensure t
   :defer t)
@@ -237,6 +244,12 @@
   :defer t
   :config
   (setq lsp-sourcekit-executable (string-trim (shell-command-to-string "xcrun --find sourcekit-lsp"))))
+(use-package typescript-mode
+  :ensure t
+  :defer t)
+(use-package wgrep
+  :vc (:fetcher github :repo mhayashi1120/Emacs-wgrep)
+  :ensure t)
 
 (require 'dired-x)
 (require 'dap-dlv-go)
@@ -417,7 +430,11 @@
  '(custom-safe-themes
    '("aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" default))
  '(package-selected-packages
-   '(uuidgen company-restclient restclient rg counsel-projectile projectile lsp-ivy ligature modus-themes zenburn-theme yasnippet-snippets yaml-mode web-mode vs-dark-theme use-package-hydra spacemacs-theme solarized-theme prettier-js powerline neotree magit lsp-ui json-mode jetbrains-darcula-theme hydra go-snippets go-mode go-imports gh-md flycheck-golangci-lint fira-code-mode exec-path-from-shell evil csharp-mode company-quickhelp cmake-mode avy add-node-modules-path)))
+   '(uuidgen company-restclient restclient rg counsel-projectile projectile lsp-ivy ligature modus-themes zenburn-theme yasnippet-snippets yaml-mode web-mode vs-dark-theme use-package-hydra spacemacs-theme solarized-theme prettier-js powerline neotree magit lsp-ui json-mode jetbrains-darcula-theme hydra go-snippets go-mode go-imports gh-md flycheck-golangci-lint fira-code-mode exec-path-from-shell evil csharp-mode company-quickhelp cmake-mode avy add-node-modules-path))
+ '(package-vc-selected-packages
+   '((vc-use-package :vc-backend Git :url "https://github.com/slotThe/vc-use-package")))
+ '(ring-bell-function 'ignore)
+ '(visible-bell t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
