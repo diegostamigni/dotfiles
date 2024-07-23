@@ -87,8 +87,7 @@
 (use-package ligature :ensure t)
 (use-package rg
   :ensure t
-  :defer t
-  :config
+  :init
   (rg-enable-default-bindings))
 (use-package go-mode
   :ensure t
@@ -260,8 +259,6 @@
   (add-hook 'eshell-mode-hook
       (lambda ()
               (define-key eshell-mode-map (kbd "C-r") #'counsel-esh-history)))
-
-
   (setq eshell-history-size         10000
         eshell-buffer-maximum-lines 10000
         eshell-hist-ignoredups t
