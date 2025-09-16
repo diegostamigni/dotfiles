@@ -121,7 +121,7 @@
 (use-package vs-dark-theme
   :ensure t
   :config
-  (set-frame-font "Fira Code-12")
+  (set-frame-font "Fira Code Light-12" nil t)
   (load-theme 'vs-dark t))
 (use-package projectile
   :ensure t
@@ -381,6 +381,8 @@
 (setq-default dired-dwim-target t)
 (setq dired-listing-switches "-alh")
 (setq dap-auto-configure-features '(sessions locals controls tooltip))
+(setq org-display-remote-inline-images "download")
+(setq org-image-actual-width nil)
 
 (add-to-list 'image-types 'svg)
 

@@ -6,7 +6,8 @@ shift + alt - i : yabai -m window --focus north
 shift + alt - j : yabai -m window --focus west
 shift + alt - l : yabai -m window --focus east
 shift + alt - k : yabai -m window --focus south
-shift + alt - 1 : yabai -m window --focus next || yabai -m window --focus first
+shift + alt - 0 : yabai -m window --focus next || yabai -m window --focus first
+shift + alt - 1 : yabai -m window --focus prev || yabai -m window --focus first
 shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 shift + alt - f : yabai -m window --toggle zoom-fullscreen
 

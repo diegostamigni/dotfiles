@@ -33,3 +33,4 @@ yabai -m rule --add app="^Dash$" manage=off
 yabai -m rule --add app="WhatsApp" manage=off
 yabai -m rule --add app="^Folx" manage=off
 yabai -m rule --add app="DaisyDisk" manage=off
+yabai -m rule --add app="ColorSlurp" manage=off

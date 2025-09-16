@@ -11,3 +11,7 @@ alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 source <(fzf --zsh)
 
+
+# setting for gup command (auto generate)
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
