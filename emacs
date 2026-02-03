@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;; package --- summary
 (require 'package)
 
@@ -113,15 +115,15 @@
   :ensure t
   :defer t)
 (use-package exec-path-from-shell
-  :ensure t
+  :init
+  (setq exec-path-from-shell-arguments '("-l"))
   :config
- (dolist (var '("GOPATH"  "GOROOT"))
-   (add-to-list 'exec-path-from-shell-variables var))
-  (exec-path-from-shell-initialize))
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "GOPATH"))
 (use-package vs-dark-theme
   :ensure t
   :config
-  (set-frame-font "Fira Code Light-12" nil t)
+  (set-frame-font "Fira Code-12:weight=light" nil t)
   (load-theme 'vs-dark t))
 (use-package projectile
   :ensure t
@@ -203,7 +205,8 @@
   (setq ivy-rich-project-root-cache-mode 1))
 (use-package terraform-mode
   :ensure t
-  :defer t)
+  :defer t
+  :hook (terraform-mode . terraform-format-on-save-mode))
 (use-package treemacs
   :ensure t
   :defer t)
@@ -427,11 +430,22 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" default))
+   '("aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8"
+	 default))
+ '(go-playground-basedir "~/Developer/go/playground")
  '(package-selected-packages
-   '(uuidgen company-restclient restclient rg counsel-projectile projectile lsp-ivy ligature modus-themes zenburn-theme yasnippet-snippets yaml-mode web-mode vs-dark-theme use-package-hydra spacemacs-theme solarized-theme prettier-js powerline neotree magit lsp-ui json-mode jetbrains-darcula-theme hydra go-snippets go-mode go-imports gh-md flycheck-golangci-lint fira-code-mode exec-path-from-shell evil csharp-mode company-quickhelp cmake-mode avy add-node-modules-path))
+   '(uuidgen company-restclient restclient rg counsel-projectile
+			 projectile lsp-ivy ligature modus-themes zenburn-theme
+			 yasnippet-snippets yaml-mode web-mode vs-dark-theme
+			 use-package-hydra spacemacs-theme solarized-theme
+			 prettier-js powerline neotree magit lsp-ui json-mode
+			 jetbrains-darcula-theme hydra go-snippets go-mode
+			 go-imports gh-md flycheck-golangci-lint fira-code-mode
+			 exec-path-from-shell evil csharp-mode company-quickhelp
+			 cmake-mode avy add-node-modules-path))
  '(package-vc-selected-packages
-   '((vc-use-package :vc-backend Git :url "https://github.com/slotThe/vc-use-package")))
+   '((vc-use-package :vc-backend Git :url
+					 "https://github.com/slotThe/vc-use-package")))
  '(ring-bell-function 'ignore)
  '(visible-bell t))
 (custom-set-faces
