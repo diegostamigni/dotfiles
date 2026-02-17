@@ -177,6 +177,12 @@
   (setq vterm-max-scrollback 10000))
 (use-package eshell
   :hook (eshell-first-time-mode . efs/configure-eshell))
+(use-package eat
+  :ensure t
+  :config
+  (eat-eshell-mode 1)
+  (eat-eshell-visual-command-mode 1)
+  (setq eshell-visual-commands nil))
 (use-package eshell-git-prompt
   :ensure t
   :commands eshell	
