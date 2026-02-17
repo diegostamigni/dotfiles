@@ -1,0 +1,7 @@
+show=drun
+prompt=Run
+width=30%
+height=40%
+insensitive=true
+allow_images=true
+term=foot

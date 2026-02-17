@@ -1,0 +1,31 @@
+# VS Dark swaylock theme
+color=1e1e1e
+font=Fira Code
+
+indicator-idle-visible
+indicator-radius=100
+indicator-thickness=8
+
+ring-color=383838
+inside-color=2a2d38
+line-color=1e1e1e
+separator-color=383838
+text-color=d2d2d2
+key-hl-color=17a0fb
+bs-hl-color=e6655c
+
+ring-ver-color=17a0fb
+inside-ver-color=2a2d38
+text-ver-color=fafafa
+
+ring-wrong-color=e6655c
+inside-wrong-color=2a2d38
+text-wrong-color=fafafa
+
+ring-clear-color=d8960e
+inside-clear-color=2a2d38
+text-clear-color=fafafa
+
+ring-caps-lock-color=17a0fb
+inside-caps-lock-color=2a2d38
+text-caps-lock-color=fafafa

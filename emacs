@@ -64,6 +64,7 @@
   :config
   (lsp-enable-which-key-integration t))
 (use-package lsp-ui
+  :ensure t
   :hook (lsp-mode . lsp-ui-mode)
   :defer t
   :custom
@@ -115,6 +116,7 @@
   :ensure t
   :defer t)
 (use-package exec-path-from-shell
+  :ensure t
   :init
   (setq exec-path-from-shell-arguments '("-l"))
   :config
@@ -123,7 +125,15 @@
 (use-package vs-dark-theme
   :ensure t
   :config
-  (set-frame-font "Fira Code-12:weight=light" nil t)
+  (defun my/apply-font (frame)
+    (with-selected-frame frame
+      (set-face-attribute 'default nil
+                          :family "Fira Code"
+                          :height 110
+                          :weight 'light)))
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions #'my/apply-font)
+    (my/apply-font (selected-frame)))
   (load-theme 'vs-dark t))
 (use-package projectile
   :ensure t
@@ -252,6 +262,9 @@
 (use-package wgrep
   :vc (:fetcher github :repo mhayashi1120/Emacs-wgrep)
   :ensure t)
+(use-package flycheck
+  :ensure t
+  :defer t)
 
 (require 'dired-x)
 (require 'dap-dlv-go)
@@ -429,25 +442,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8"
-	 default))
- '(go-playground-basedir "~/Developer/go/playground")
- '(package-selected-packages
-   '(uuidgen company-restclient restclient rg counsel-projectile
-			 projectile lsp-ivy ligature modus-themes zenburn-theme
-			 yasnippet-snippets yaml-mode web-mode vs-dark-theme
-			 use-package-hydra spacemacs-theme solarized-theme
-			 prettier-js powerline neotree magit lsp-ui json-mode
-			 jetbrains-darcula-theme hydra go-snippets go-mode
-			 go-imports gh-md flycheck-golangci-lint fira-code-mode
-			 exec-path-from-shell evil csharp-mode company-quickhelp
-			 cmake-mode avy add-node-modules-path))
  '(package-vc-selected-packages
    '((vc-use-package :vc-backend Git :url
-					 "https://github.com/slotThe/vc-use-package")))
- '(ring-bell-function 'ignore)
- '(visible-bell t))
+		     "https://github.com/slotThe/vc-use-package"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

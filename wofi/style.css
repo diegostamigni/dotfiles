@@ -1,0 +1,68 @@
+@define-color bg #1e1e1e;
+@define-color bg_alt #252526;
+@define-color panel #2a2d38;
+@define-color border #383838;
+@define-color fg #d2d2d2;
+@define-color fg_strong #fafafa;
+@define-color fg_muted #8d9b99;
+@define-color blue #17a0fb;
+@define-color selection #264f78;
+
+* {
+    font-family: "FiraCode Nerd Font", "Fira Code", "Noto Sans", sans-serif;
+    font-size: 13px;
+    color: @fg;
+}
+
+window {
+    background-color: @bg;
+    border: 1px solid @border;
+}
+
+#outer-box {
+    /* padding: 18px; */
+    background-color: @bg;
+}
+
+#inner-box {
+    background-color: @bg_alt;
+    border: 1px solid @border;
+    padding: 10px;
+}
+
+#input {
+    margin: 0 0 10px 0;
+    padding: 8px 10px;
+    border: 1px solid @border;
+    background-color: @panel;
+    color: @fg_strong;
+}
+
+#input:focus {
+    border: 1px solid @blue;
+}
+
+#scroll {
+    margin: 0;
+}
+
+#entry {
+    padding: 6px 10px;
+    background-color: transparent;
+}
+
+#entry:selected {
+    background-color: @selection;
+}
+
+#text {
+    color: @fg;
+}
+
+#text:selected {
+    color: @fg_strong;
+}
+
+#img {
+    margin-right: 8px;
+}
