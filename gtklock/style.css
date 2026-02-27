@@ -1,0 +1,21 @@
+window {
+  background-color: #1e1e1e;
+  color: #d2d2d2;
+  font-family: "Fira Code";
+}
+
+.clock {
+  color: #fafafa;
+}
+
+.date {
+  color: #8d9b99;
+}
+
+entry {
+  background-color: #2a2d38;
+  color: #d2d2d2;
+  border: 2px solid #383838;
+  border-radius: 8px;
+  padding: 10px 16px;
+}

@@ -121,7 +121,7 @@
   (setq exec-path-from-shell-arguments '("-l"))
   :config
   (exec-path-from-shell-initialize)
-  (exec-path-from-shell-copy-env "GOPATH"))
+  (exec-path-from-shell-copy-envs '("PATH" "GOPATH")))
 (use-package vs-dark-theme
   :ensure t
   :config
@@ -373,6 +373,7 @@
 (global-set-key (kbd "C-c C-c C-k") 'dap-disconnect)
 (global-set-key (kbd "C-<next>") 'flycheck-next-error)
 (global-set-key (kbd "C-<prior>") 'flycheck-previous-error)
+(global-set-key (kbd "C-c C-p") 'eshell-new)
 
 (tool-bar-mode 0)
 (menu-bar-mode 0)

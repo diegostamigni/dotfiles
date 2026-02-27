@@ -29,7 +29,10 @@ fi
 export LANG=en_GB.UTF-8
 export MANPAGER=most
 export EDITOR='emacsclient -nw'
-export PATH="$PATH:$HOME/Developer/go/bin:$HOME/.bin:$HOME/.opencode/bin"
+export PATH="$PATH:$HOME/Developer/go/bin:$HOME/.bin:$HOME/.opencode/bin:$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$HOME/.nodejs/current/bin"
 export GOPATH="$HOME/Developer/go"
 export QT_QPA_PLATFORMTHEME=qt5ct
 export QT_STYLE_OVERRIDE=adwaita-dark
+export BROWSER=/usr/bin/google-chrome-stable
+
+
